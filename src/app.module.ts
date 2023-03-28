@@ -3,6 +3,8 @@ import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConfigValidationSchema } from './config/config.schema';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -23,7 +25,9 @@ import { ConfigValidationSchema } from './config/config.schema';
         database: configService.get('DB_DATABASE'),
         autoLoadEntities: true,
       })
-    })
+    }),
+    AuthModule,
+    UsersModule
   ],
 })
 export class AppModule { }
