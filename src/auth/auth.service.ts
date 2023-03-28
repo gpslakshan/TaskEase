@@ -10,6 +10,6 @@ export class AuthService {
     ) { }
 
     async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-        return await this.usersService.createUser(authCredentialsDto);
+        return this.usersService.createUser(authCredentialsDto);
     }
 }
