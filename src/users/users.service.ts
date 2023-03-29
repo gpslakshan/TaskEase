@@ -13,6 +13,10 @@ export class UsersService {
         private usersRepository: Repository<User>,
     ) { }
 
+    async findUser(username: string): Promise<User> {
+        return await this.usersRepository.findOne({ where: { username } });
+    }
+
     async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
         const { username, password } = authCredentialsDto;
 
