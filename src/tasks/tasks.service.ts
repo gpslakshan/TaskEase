@@ -14,14 +14,14 @@ export class TasksService {
         private tasksRepository: Repository<Task>,
     ) { }
 
-    async getAllTasks(): Promise<Task[]> {
-        return await this.tasksRepository.find();
+    async getAllTasks(user: User): Promise<Task[]> {
+        return await this.tasksRepository.find({ where: { user } });
     }
 
-    async getTasksWithFilters(filterDto: GetTasksFilterDto): Promise<Task[]> {
+    async getTasksWithFilters(filterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
         const { status, search } = filterDto;
 
-        let tasks = await this.getAllTasks();
+        let tasks = await this.getAllTasks(user);
 
         if (status) {
             tasks = tasks.filter((task) => task.status === status)

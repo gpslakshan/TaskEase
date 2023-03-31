@@ -17,11 +17,14 @@ export class TasksController {
     ) { }
 
     @Get()
-    getTasks(@Query() filterDto: GetTasksFilterDto) {
+    getTasks(
+        @Query() filterDto: GetTasksFilterDto,
+        @GetUser() user: User
+    ) {
         if (Object.keys(filterDto).length > 0) {
-            return this.tasksService.getTasksWithFilters(filterDto);
+            return this.tasksService.getTasksWithFilters(filterDto, user);
         } else {
-            return this.tasksService.getAllTasks();
+            return this.tasksService.getAllTasks(user);
         }
     }
 
